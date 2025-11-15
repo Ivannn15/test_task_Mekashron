@@ -27,3 +27,8 @@
 /Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/obj/Debug/net8.0/test_task_Mekashron.pdb
 /Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/obj/Debug/net8.0/test_task_Mekashron.genruntimeconfig.cache
 /Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/obj/Debug/net8.0/ref/test_task_Mekashron.dll
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/bin/Debug/net8.0/publish/web.config
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/bin/Debug/net8.0/publish/appsettings.Development.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/bin/Debug/net8.0/publish/appsettings.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/bin/Debug/net8.0/publish/test_task_Mekashron.deps.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/bin/Debug/net8.0/publish/test_task_Mekashron.runtimeconfig.json
