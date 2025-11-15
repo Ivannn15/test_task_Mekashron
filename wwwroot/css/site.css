@@ -1,0 +1,60 @@
+:root {
+    --login-card-width: min(500px, 90vw);
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+.hero-area {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem 4rem;
+    background: radial-gradient(circle at top, rgba(13,110,253,.12), transparent 70%);
+}
+
+.login-card {
+    width: var(--login-card-width);
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+    background: #fff;
+}
+
+.login-card .form-control:focus {
+    box-shadow: 0 0 0 0.15rem rgba(13,110,253,.2);
+}
+
+.validation-summary-errors {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    color: #dc3545;
+}
+
+.user-details-list {
+    border-radius: 1rem;
+    background: #f8fafc;
+    padding: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.user-details-list dt {
+    font-size: .85rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.user-details-list dd {
+    margin-bottom: 1rem;
+    font-size: .95rem;
+    color: #0f172a;
+}
+
+@media (max-width: 575px) {
+    header .navbar-brand {
+        font-size: 1.15rem;
+    }
+}

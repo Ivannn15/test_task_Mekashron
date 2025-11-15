@@ -1,0 +1,81 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<section class="hero-area">
+    <div class="card login-card p-4 p-md-5 w-100">
+        <div class="text-center mb-4">
+            <p class="text-uppercase text-primary fw-semibold small mb-2">Secure area</p>
+            <h1 class="fw-bold">Sign In</h1>
+            <p class="text-muted mb-0">Access your Mekashron workspace using your customer credentials.</p>
+        </div>
+
+        <form asp-action="Login" method="post" class="needs-validation" novalidate>
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label fw-semibold"></label>
+                <input asp-for="Username" class="form-control form-control-lg" placeholder="Enter username" required />
+                <div class="invalid-feedback">Username is required.</div>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Password" class="form-label fw-semibold"></label>
+                <input asp-for="Password" class="form-control form-control-lg" placeholder="Enter password" required />
+                <div class="invalid-feedback">Password is required.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Sign In</button>
+        </form>
+
+        @if (Model.Result is not null)
+        {
+            <div class="mt-4">
+                <div class="alert @(Model.Result.Success ? "alert-success" : "alert-danger")" role="alert">
+                    <div class="fw-semibold">@Model.Result.Message</div>
+                    @if (Model.Result.ResultCode is not null)
+                    {
+                        <div class="small opacity-75">Result code: @Model.Result.ResultCode</div>
+                    }
+                </div>
+
+                @if (Model.Result.Details?.Any() == true)
+                {
+                    <div class="user-details-list">
+                        <h2 class="h6 fw-bold mb-3">User profile</h2>
+                        <dl class="row mb-0">
+                            @foreach (var detail in Model.Result.Details)
+                            {
+                                <dt class="col-sm-4">@detail.Key</dt>
+                                <dd class="col-sm-8">@detail.Value</dd>
+                            }
+                        </dl>
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="mt-4 small text-muted">
+            Need to create a sandbox account? Call <code>POST /api/account/register</code> with JSON body <code>{ "username": "demo", "password": "Pass@123" }</code>.
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        (function () {
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}
