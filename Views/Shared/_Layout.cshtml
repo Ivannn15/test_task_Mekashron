@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Mekashron Login</title>
     @{
-        var cssPath = System.IO.Path.Combine(Env.WebRootPath ?? string.Empty, "css", "site.css");
-        var inlineCss = System.IO.File.Exists(cssPath) ? System.IO.File.ReadAllText(cssPath) : string.Empty;
+        var cssFile = Env.WebRootFileProvider?.GetFileInfo("css/site.css");
+        var inlineCss = cssFile?.Exists == true && !string.IsNullOrWhiteSpace(cssFile.PhysicalPath)
+            ? System.IO.File.ReadAllText(cssFile.PhysicalPath)
+            : string.Empty;
     }
     @if (!string.IsNullOrWhiteSpace(inlineCss))
     {
