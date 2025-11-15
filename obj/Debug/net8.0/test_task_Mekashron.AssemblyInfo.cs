@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("test_task_Mekashron")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+586ad6a611d9cb044711f5e607cf53d16bb68416")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+909485aa14121f709fa5281a6cf9654e8699e28c")]
 [assembly: System.Reflection.AssemblyProductAttribute("test_task_Mekashron")]
 [assembly: System.Reflection.AssemblyTitleAttribute("test_task_Mekashron")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
