@@ -1,20 +1,9 @@
-@inject IWebHostEnvironment Env
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Mekashron Login</title>
-    @{
-        var cssFile = Env.WebRootFileProvider?.GetFileInfo("css/site.css");
-        var inlineCss = cssFile?.Exists == true && !string.IsNullOrWhiteSpace(cssFile.PhysicalPath)
-            ? System.IO.File.ReadAllText(cssFile.PhysicalPath)
-            : string.Empty;
-    }
-    @if (!string.IsNullOrWhiteSpace(inlineCss))
-    {
-        <style>@Html.Raw(inlineCss)</style>
-    }
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="d-flex flex-column min-vh-100 bg-body-secondary">
