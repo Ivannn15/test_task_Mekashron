@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.build.test_task_Mekashron.props",
+      "PackagePath": "build\\test_task_Mekashron.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildMultiTargeting.test_task_Mekashron.props",
+      "PackagePath": "buildMultiTargeting\\test_task_Mekashron.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.buildTransitive.test_task_Mekashron.props",
+      "PackagePath": "buildTransitive\\test_task_Mekashron.props"
+    },
+    {
+      "Id": "obj/Release/net8.0/staticwebassets/msbuild.test_task_Mekashron.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

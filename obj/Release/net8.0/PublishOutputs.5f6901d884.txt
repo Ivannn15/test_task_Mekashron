@@ -1,0 +1,7 @@
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/test_task_Mekashron
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/appsettings.Development.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/appsettings.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/test_task_Mekashron.dll
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/test_task_Mekashron.deps.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/test_task_Mekashron.runtimeconfig.json
+/Users/ivanogloblin/RiderProjects/test_task_Mekashron/test_task_Mekashron/publish/test_task_Mekashron.pdb

@@ -1,6 +1,8 @@
 @model LoginViewModel
 @{
     ViewData["Title"] = "Sign In";
+    var registerSuccess = TempData["RegisterSuccess"] as string;
+    var registerError = TempData["RegisterError"] as string;
 }
 
 <section class="hero-area">
@@ -57,8 +59,55 @@
             </div>
         }
 
-        <div class="mt-4 small text-muted">
-            Need to create a sandbox account? Call <code>POST /api/account/register</code> with JSON body <code>{ "username": "demo", "password": "Pass@123" }</code>.
+        <div class="register-divider mt-5 pt-4">
+            <div class="mb-4">
+                <p class="text-uppercase text-primary fw-semibold small mb-1">Sandbox access</p>
+                <h2 class="h5 fw-bold mb-1">Need an account?</h2>
+                <p class="text-muted small mb-0">Use the mini form below to create a test account without leaving the page.</p>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(registerSuccess))
+            {
+                <div class="alert alert-success" role="alert">@registerSuccess</div>
+            }
+            else if (!string.IsNullOrWhiteSpace(registerError))
+            {
+                <div class="alert alert-danger" role="alert">@registerError</div>
+            }
+
+            <form asp-action="RegisterForm" method="post" class="row g-3 register-form needs-validation" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="col-md-6">
+                    <label for="registerUsername" class="form-label fw-semibold">Username / Email</label>
+                    <input type="text" class="form-control" id="registerUsername" name="Username" placeholder="Enter unique username" required minlength="3" />
+                    <div class="invalid-feedback">Provide at least 3 characters.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="registerPassword" class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control" id="registerPassword" name="Password" placeholder="Create a password" required minlength="6" />
+                    <div class="invalid-feedback">Password must contain 6+ characters.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="registerFirstName" class="form-label fw-semibold">First name <span class="text-muted">(optional)</span></label>
+                    <input type="text" class="form-control" id="registerFirstName" name="FirstName" placeholder="First name" />
+                </div>
+                <div class="col-md-6">
+                    <label for="registerLastName" class="form-label fw-semibold">Last name <span class="text-muted">(optional)</span></label>
+                    <input type="text" class="form-control" id="registerLastName" name="LastName" placeholder="Last name" />
+                </div>
+                <div class="col-12">
+                    <label for="registerMobile" class="form-label fw-semibold">Mobile <span class="text-muted">(optional)</span></label>
+                    <input type="text" class="form-control" id="registerMobile" name="Mobile" placeholder="+1234567890" />
+                </div>
+                <div class="col-12 d-flex flex-column flex-sm-row gap-3 align-items-sm-center">
+                    <button type="submit" class="btn btn-outline-primary px-4">Create sandbox account</button>
+                    <p class="small text-muted mb-0">Country is set to 1 and affiliate to 0 by default. Duplicate usernames are rejected.</p>
+                </div>
+            </form>
+
+            <div class="mt-3 small text-muted">
+                Prefer cURL? Call <code>POST /api/account/register</code> with JSON body <code>{ "username": "demo", "password": "Pass@123" }</code> (no trailing commas).
+            </div>
         </div>
     </div>
 </section>

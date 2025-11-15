@@ -139,6 +139,13 @@ public sealed class SoapAuthService : ISoapAuthService
                 .Descendants()
                 .FirstOrDefault(x => x.Name.LocalName.EndsWith("Result", StringComparison.OrdinalIgnoreCase));
 
+            if (resultNode is null)
+            {
+                resultNode = document
+                    .Descendants()
+                    .FirstOrDefault(x => string.Equals(x.Name.LocalName, "return", StringComparison.OrdinalIgnoreCase));
+            }
+
             return resultNode?.Value ?? soapResponse;
         }
         catch (Exception)

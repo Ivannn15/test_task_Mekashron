@@ -77,18 +77,7 @@ public class AccountController : Controller
 
         try
         {
-            var payload = new RegisterPayload
-            {
-                Email = request.Username.Trim(),
-                Password = request.Password.Trim(),
-                FirstName = string.IsNullOrWhiteSpace(request.FirstName) ? request.Username.Trim() : request.FirstName.Trim(),
-                LastName = string.IsNullOrWhiteSpace(request.LastName) ? request.Username.Trim() : request.LastName.Trim(),
-                Mobile = string.IsNullOrWhiteSpace(request.Mobile) ? "0000000000" : request.Mobile.Trim(),
-                CountryId = request.CountryId <= 0 ? 1 : request.CountryId,
-                AffiliateId = request.AffiliateId < 0 ? 0 : request.AffiliateId,
-                SignupIp = string.IsNullOrWhiteSpace(request.SignupIp) ? GetClientIp() : request.SignupIp.Trim()
-            };
-
+            var payload = BuildRegisterPayload(request);
             var result = await _soapAuthService.RegisterNewCustomerAsync(payload, HttpContext.RequestAborted);
             return Ok(new
             {
@@ -108,6 +97,72 @@ public class AccountController : Controller
             _logger.LogError(ex, "Unexpected register error");
             return StatusCode(StatusCodes.Status500InternalServerError, new { success = false, message = "Unexpected error while contacting the SOAP service." });
         }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RegisterForm([FromForm] RegisterRequest request)
+    {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .Where(e => !string.IsNullOrWhiteSpace(e));
+
+            TempData["RegisterError"] = errors.Any()
+                ? string.Join(" ", errors)
+                : "Please fix the highlighted fields.";
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        try
+        {
+            var payload = BuildRegisterPayload(request);
+            var result = await _soapAuthService.RegisterNewCustomerAsync(payload, HttpContext.RequestAborted);
+
+            if (result.Success)
+            {
+                TempData["RegisterSuccess"] = $"Sandbox account '{payload.Email}' has been created. You can sign in using these credentials.";
+            }
+            else
+            {
+                TempData["RegisterError"] = string.IsNullOrWhiteSpace(result.Message)
+                    ? "Service returned an error while creating the account."
+                    : result.Message;
+            }
+        }
+        catch (SoapRequestException ex)
+        {
+            _logger.LogWarning(ex, "SOAP register (form) failed");
+            TempData["RegisterError"] = ex.Message;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected register error from form");
+            TempData["RegisterError"] = "Unexpected error while contacting the SOAP service.";
+        }
+
+        return RedirectToAction(nameof(Login));
+    }
+
+    private RegisterPayload BuildRegisterPayload(RegisterRequest request)
+    {
+        var username = request.Username?.Trim() ?? string.Empty;
+        var password = request.Password?.Trim() ?? string.Empty;
+
+        return new RegisterPayload
+        {
+            Email = username,
+            Password = password,
+            FirstName = string.IsNullOrWhiteSpace(request.FirstName) ? username : request.FirstName.Trim(),
+            LastName = string.IsNullOrWhiteSpace(request.LastName) ? username : request.LastName.Trim(),
+            Mobile = string.IsNullOrWhiteSpace(request.Mobile) ? "0000000000" : request.Mobile.Trim(),
+            CountryId = request.CountryId <= 0 ? 1 : request.CountryId,
+            AffiliateId = request.AffiliateId < 0 ? 0 : request.AffiliateId,
+            SignupIp = string.IsNullOrWhiteSpace(request.SignupIp) ? GetClientIp() : request.SignupIp.Trim()
+        };
     }
 
     private string GetClientIp()
