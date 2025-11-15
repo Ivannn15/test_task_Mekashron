@@ -2,6 +2,8 @@ using Microsoft.Extensions.Options;
 using test_task_Mekashron.Options;
 using test_task_Mekashron.Services;
 
+Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
